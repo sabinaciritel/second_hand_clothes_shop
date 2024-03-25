@@ -22,11 +22,12 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 
 
 ## Tehnologii Utilizate
-Spring Data JPA: Pentru operațiile de bază de date, facilitând lucrul cu date relaționale.
-Thymeleaf: Ca motor de șabloane pentru redarea vizualizărilor.
-MySQL: Pentru baza de date destinată stocării informațiilor despre produsele și utilizatorii magazinului.
-Spring Security: Pentru autentificare și autorizare.
-Maven: Pentru gestionarea proiectului și instrument de construcție.
+1. Spring Data JPA: Pentru operațiile de bază de date, facilitând lucrul cu date relaționale.
+2. Thymeleaf: Ca motor de șabloane pentru redarea vizualizărilor.
+3. MySQL: Pentru baza de date destinată stocării informațiilor despre produsele și utilizatorii magazinului.
+4. Spring Security: Pentru autentificare și autorizare.
+5. Maven: Pentru gestionarea proiectului și instrument de construcție.
+
 
 ## Backend
 
