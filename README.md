@@ -22,5 +22,22 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 
 
 ## Tehnologii Utilizate
-Pentru implementarea acestui proiect, se va folosi limbajul de programare Java împreună cu un framework web (cum ar fi Spring Boot), o bază de date relațională (cum ar fi MySQL ) pentru stocarea informațiilor despre utilizatori.
+Spring Data JPA: Pentru operațiile de bază de date, facilitând lucrul cu date relaționale.
+Thymeleaf: Ca motor de șabloane pentru redarea vizualizărilor.
+MySQL: Pentru baza de date destinată stocării informațiilor despre produsele și utilizatorii magazinului.
+Spring Security: Pentru autentificare și autorizare.
+Maven: Pentru gestionarea proiectului și instrument de construcție.
+
+## Backend
+
+POST /auth/register Descriere: Înregistrează un utilizator nou cu informațiile de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile de înregistrare necesare pentru crearea unui cont de utilizator nou. Răspuns: Această rută nu returnează explicit un corp al răspunsului. În cazul unei înregistrări reușite, utilizatorul este înregistrat în sistem fără niciun mesaj de confirmare. 
+
+GET /auth/find Descriere: Găsește un utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului folosite pentru găsirea unui cont de utilizator. Răspuns: Această rută nu returnează explicit un corp al răspunsului. Se presupune că efectuează o formă de căutare a utilizatorului și gestionează rezultatul intern sau prin excepții. Notă: Utilizarea @RequestBody într-o cerere de tip GET este neconvențională și s-ar putea să nu fie suportată de toți clienții sau proxy-urile.
+
+DELETE /auth/delete Descriere: Șterge un utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului necesare pentru ștergerea unui cont de utilizator. Răspuns: Această rută nu returnează explicit un corp al răspunsului. 
+
+PUT /auth/update Descriere: Actualizează informațiile unui utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului care urmează să fie actualizate. Răspuns: Această rută nu returnează explicit un corp al răspunsului. În cazul unei actualizări reușite, informațiile utilizatorului sunt actualizate în sistem fără niciun mesaj de confirmare. Modele RegistrationBody Modelul RegistrationBody conține informații despre utilizator, care sunt utilizate în diverse puncte terminale pentru înregistrarea, găsirea, ștergerea și actualizarea utilizatorilor. Câmpurile și constrângerile specifice de validare ale acestui model nu sunt detaliate în fragmentul de cod furnizat.
+
+
+
 
