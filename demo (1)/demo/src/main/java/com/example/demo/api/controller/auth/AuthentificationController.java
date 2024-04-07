@@ -4,11 +4,7 @@ package com.example.demo.api.controller.auth;
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.service.ServiceUser;
 import org.springframework.web.bind.annotation.*;
-/**
- * Constructs an AuthentificationController with the specified user service.
- *
- * @param serviceUser The service for user operations, including registration, finding, updating, and deleting users.
- */
+
 @RestController
 @RequestMapping("/auth")
 public class AuthentificationController {

@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for managing user operations.
- * This service provides methods to register, update, find, and delete users in the application.
+ * Service class for managing product operations in the application.
+ * It offers functionalities to register, find, update, and delete products. It also implements the Subject
+ * interface from the Observer pattern, allowing it to notify observers about significant product stock changes.
  */
 @Service
 public class ServiceProduct implements Subject {
@@ -24,7 +25,13 @@ public class ServiceProduct implements Subject {
     private List<Observer> observers = new ArrayList<>();
 
 
-
+    /**
+     * Constructs a ServiceProduct with specified UserDAOP and UserDAO.
+     * Automatically adds all users from the database as observers to monitor product stock changes.
+     *
+     * @param userDAOP DAO for product-related data access.
+     * @param userDAO DAO for user-related data access.
+     */
     public ServiceProduct(UserDAOP userDAOP, UserDAO userDAO){
 
         this.userDAOP=userDAOP;
@@ -34,6 +41,12 @@ public class ServiceProduct implements Subject {
             this.addObserver(user);
         }
     }
+    /**
+     * Registers a new product in the system based on the provided product registration body.
+     *
+     * @param registrationBodyProduct The registration details of the new product.
+     * @return The newly registered Product object.
+     */
     public Product registerProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = new Product();
         product.setId(registrationBodyProduct.getId());
@@ -45,6 +58,12 @@ public class ServiceProduct implements Subject {
         return userDAOP.save(product);
 
     }
+    /**
+     * Finds a product by its name as provided in the product registration body.
+     *
+     * @param registrationBodyProduct The details of the product to find.
+     * @return The found Product object, or null if no product with the given name exists.
+     */
     public Product findProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = new Product();
         System.out.println(registrationBodyProduct.getId());
@@ -56,6 +75,13 @@ public class ServiceProduct implements Subject {
         return product;
 
     }
+    /**
+     * Updates an existing product with new details provided in the product registration body.
+     * Notifies all observers if the updated stock quantity is zero.
+     *
+     * @param registrationBodyProduct The new details of the product.
+     * @return The updated Product object.
+     */
     public Product updateProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = findProduct(registrationBodyProduct);
 
@@ -69,7 +95,11 @@ public class ServiceProduct implements Subject {
 
         return userDAOP.save(product);
     }
-
+    /**
+     * Deletes a product based on the details provided in the product registration body.
+     *
+     * @param registrationBodyProduct The details of the product to delete.
+     */
     public void deleteProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = new Product();
         product =findProduct(registrationBodyProduct);
@@ -79,15 +109,26 @@ public class ServiceProduct implements Subject {
         userDAOP.delete(product);
 
     }
+    /**
+     * Adds an observer to the list of observers to be notified of stock changes.
+     *
+     * @param o The observer to add.
+     */
     public void addObserver(Observer o) {
         observers.add(o);
     }
-
+    /**
+     * Removes an observer from the list of observers.
+     *
+     * @param o The observer to remove.
+     */
     @Override
     public void removeObserver(Observer o) {
         observers.remove(o);
     }
-
+    /**
+     * Notifies all registered observers of a significant event, typically a product stock reaching zero.
+     */
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {

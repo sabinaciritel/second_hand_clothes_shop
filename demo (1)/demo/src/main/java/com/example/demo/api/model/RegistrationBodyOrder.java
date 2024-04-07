@@ -1,49 +1,84 @@
-//package com.example.demo.api.model;
-//
-//import com.example.demo.model.User;
-//import jakarta.persistence.Column;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
-//
-//public class RegistrationBodyOrder {
-//    private Long id;
-//    private String username;
-//
-//    private String shippingAddress;
-//
-//    private String status;
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getShippingAddress() {
-//        return shippingAddress;
-//    }
-//
-//    public void setShippingAddress(String shippingAddress) {
-//        this.shippingAddress = shippingAddress;
-//    }
-//
-//    public String getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(String status) {
-//        this.status = status;
-//    }
-//
-//
-//}
+package com.example.demo.api.model;
+
+import com.example.demo.model.User;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+/**
+ * A model class representing registration data for orders.
+ */
+public class RegistrationBodyOrder {
+    private Long id;
+    private String username;
+
+    private String shippingAddress;
+
+    private String status;
+    /**
+     * Retrieves the ID of the order registration body.
+     *
+     * @return the ID of the order registration body
+     */
+    public Long getId() {
+        return id;
+    }
+    /**
+     * Sets the ID of the order registration body.
+     *
+     * @param id the ID of the order registration body to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    /**
+     * Retrieves the username associated with the order registration body.
+     *
+     * @return the username associated with the order registration body
+     */
+    public String getUsername() {
+        return username;
+    }
+    /**
+     * Sets the username associated with the order registration body.
+     *
+     * @param username the username associated with the order registration body to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    /**
+     * Retrieves the shipping address of the order registration body.
+     *
+     * @return the shipping address of the order registration body
+     */
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+    /**
+     * Sets the shipping address of the order registration body.
+     *
+     * @param shippingAddress the shipping address of the order registration body to set
+     */
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+    /**
+     * Retrieves the status of the order registration body.
+     *
+     * @return the status of the order registration body
+     */
+    public String getStatus() {
+        return status;
+    }
+    /**
+     * Sets the status of the order registration body.
+     *
+     * @param status the status of the order registration body to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+}

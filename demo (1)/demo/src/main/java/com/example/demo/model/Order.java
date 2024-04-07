@@ -18,7 +18,7 @@ public class Order {
     private Long id;
 
     @Column(nullable = false)
-    private String user;
+    private String username;
 
     @Column(nullable = false)
     private String shippingAddress;
@@ -42,8 +42,8 @@ public class Order {
      * @param shippingAddress  The address to which the order will be shipped.
      * @param status           The current status of the order (e.g., "Pending", "Shipped", "Delivered").
      */
-    public Order(String user, String shippingAddress, String status) {
-        this.user = user;
+    public Order(String username, String shippingAddress, String status) {
+        this.username = username;
         this.shippingAddress = shippingAddress;
         this.status = status;
     }
@@ -71,12 +71,13 @@ public class Order {
      * @return the user associated with the order.
      */
 
-    public String getUser() {
-        return user;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
