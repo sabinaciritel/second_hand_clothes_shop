@@ -17,9 +17,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(nullable = false)
+    private String user;
 
     @Column(nullable = false)
     private String shippingAddress;
@@ -43,7 +42,7 @@ public class Order {
      * @param shippingAddress  The address to which the order will be shipped.
      * @param status           The current status of the order (e.g., "Pending", "Shipped", "Delivered").
      */
-    public Order(User user, String shippingAddress, String status) {
+    public Order(String user, String shippingAddress, String status) {
         this.user = user;
         this.shippingAddress = shippingAddress;
         this.status = status;
@@ -71,15 +70,12 @@ public class Order {
      * Gets the user who placed the order.
      * @return the user associated with the order.
      */
-    public User getUser() {
+
+    public String getUser() {
         return user;
     }
 
-    /**
-     * Sets the user who placed the order.
-     * @param user the new user associated with the order.
-     */
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

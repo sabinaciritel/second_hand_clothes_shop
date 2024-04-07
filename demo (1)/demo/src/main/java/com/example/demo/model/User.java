@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.observerPattern.Observer;
 import jakarta.persistence.*;
 
 /**
@@ -9,7 +10,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Observer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -127,5 +128,8 @@ public class User {
      */
     public void setRole(String role) {
         this.role = role;
+    }
+    public void update() {
+        System.out.println("Atenție! Stocul unui produs a ajuns la 0.");
     }
 }
