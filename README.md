@@ -39,6 +39,31 @@ DELETE /auth/delete Descriere: Șterge un utilizator pe baza informațiilor de �
 
 PUT /auth/update Descriere: Actualizează informațiile unui utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului care urmează să fie actualizate. Răspuns: Această rută nu returnează explicit un corp al răspunsului. În cazul unei actualizări reușite, informațiile utilizatorului sunt actualizate în sistem fără niciun mesaj de confirmare. Modele RegistrationBody Modelul RegistrationBody conține informații despre utilizator, care sunt utilizate în diverse puncte terminale pentru înregistrarea, găsirea, ștergerea și actualizarea utilizatorilor. Câmpurile și constrângerile specifice de validare ale acestui model nu sunt detaliate în fragmentul de cod furnizat.
 
+## Observer Pattern
+
+Folosind Java, implementarea pattern-ului Observer implică câteva componente cheie care colaborează pentru a permite unui subiect să notifice observatorii săi despre schimbări, fără ca aceștia să fie strâns cuplați. Iată o descriere bazată pe fișierele încărcate:
+
+Observer.java: Definește interfața pe care orice observator trebuie să o implementeze pentru a primi actualizări de la subiect. Observatorii vor avea o metodă update prin care sunt notificați.
+
+Subject.java: Conturează interfața pentru subiect, detaliiind metode pentru atașarea, detașarea observatorilor și o metodă notifyObservers pentru a actualiza toți observatorii despre schimbări.
+
+User.java: Reprezintă o implementare concretă a interfeței Observer, indicând cum un utilizator (ca observator) primește actualizări. Aceasta este o clasă care va răspunde la notificările subiectului.
+
+ServiceProduct.java: Este o implementare a interfeței Subject, arătând cum un serviciu sau produs (ca subiect) gestionează observatorii săi și îi notifică despre schimbări. Aceasta menține o listă de observatori și îi notifică prin metoda notifyObservers.
+
+Descriere Detaliată a Implementării Pattern-ului Observer:
+Interfața Observer: Observatorii trebuie să implementeze această interfață pentru a putea primi notificări. Cheia aici este metoda update, prin care sunt anunțați de schimbări.
+
+Interfața Subject: Aceasta include metode pentru înregistrarea (attach), scoaterea din înregistrare (detach) a observatorilor și o metodă notifyObservers pentru a actualiza toți observatorii înregistrați despre schimbare.
+
+Observator Concret (User): Aceasta clasă implementează interfața Observer și, în metoda sa update, va reacționa la notificarea primită de la subiect.
+
+Subiect Concret (ServiceProduct): Implementează interfața Subject, gestionând o listă de observatori și notificându-i despre schimbări prin metoda notifyObservers.
+
+Pattern-ul Observer permite decuplarea slabă între obiecte, deoarece subiectul nu trebuie să cunoască detalii specifice despre observatori, ci doar că aceștia implementează interfața Observer. Este utilizat pe scară largă în implementarea sistemelor distribuite de gestionare a evenimentelor, în arhitecturi model-view-controller (MVC) și în scenarii în care un obiect trebuie să notifice alte obiecte fără să facă presupuneri despre cine sunt acele obiecte.
+
+
+
 
 
 
