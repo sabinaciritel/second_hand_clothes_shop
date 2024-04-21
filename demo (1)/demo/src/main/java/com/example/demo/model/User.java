@@ -3,6 +3,8 @@ package com.example.demo.model;
 import com.example.demo.observerPattern.Observer;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 /**
  * The User entity represents a user in the database.
  * Each user has a unique identifier, an email address, a username, a password, and a role.
@@ -131,5 +133,18 @@ public class User implements Observer {
     }
     public void update() {
         System.out.println("Atenție! Stocul unui produs a ajuns la 0.");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(role, user.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, username, password, role);
     }
 }

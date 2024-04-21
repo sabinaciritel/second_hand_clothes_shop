@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.api.model.ProductName;
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.api.model.RegistrationBodyProduct;
+import com.example.demo.api.model.UserUsername;
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import com.example.demo.model.dao.UserDAO;
@@ -19,7 +21,7 @@ import java.util.List;
  * interface from the Observer pattern, allowing it to notify observers about significant product stock changes.
  */
 @Service
-public class ServiceProduct implements Subject {
+public class ServiceProduct implements ServiceProductImpl,Subject {
     private UserDAOP userDAOP;
     private UserDAO userDAO;
     private List<Observer> observers = new ArrayList<>();
@@ -55,7 +57,9 @@ public class ServiceProduct implements Subject {
         product.setPrice(registrationBodyProduct.getPrice());
         product.setStockQuantity(registrationBodyProduct.getStockQuantity());
 
-        return userDAOP.save(product);
+        userDAOP.save(product);
+        return product;
+
 
     }
     /**
@@ -66,12 +70,9 @@ public class ServiceProduct implements Subject {
      */
     public Product findProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = new Product();
-        System.out.println(registrationBodyProduct.getId());
+
         product = userDAOP.findByName(registrationBodyProduct.getName());
-        System.out.println(product.getName());
-        System.out.println(product.getDescription());
-        System.out.println(product.getPrice());
-        System.out.println(product.getStockQuantity());
+
         return product;
 
     }
@@ -84,6 +85,10 @@ public class ServiceProduct implements Subject {
      */
     public Product updateProduct(RegistrationBodyProduct registrationBodyProduct) {
         Product product = findProduct(registrationBodyProduct);
+        if (product == null) {
+
+            return null;
+        }
 
         product.setDescription(registrationBodyProduct.getDescription());
         product.setPrice(registrationBodyProduct.getPrice());
@@ -93,20 +98,19 @@ public class ServiceProduct implements Subject {
             notifyObservers();
         }
 
-        return userDAOP.save(product);
+       userDAOP.save(product);
+        return product;
     }
     /**
      * Deletes a product based on the details provided in the product registration body.
      *
      * @param registrationBodyProduct The details of the product to delete.
      */
-    public void deleteProduct(RegistrationBodyProduct registrationBodyProduct) {
-        Product product = new Product();
-        product =findProduct(registrationBodyProduct);
-        product.setDescription(registrationBodyProduct.getDescription());
-        product.setPrice(registrationBodyProduct.getPrice());
-        product.setStockQuantity(registrationBodyProduct.getStockQuantity());
+    public Product deleteProduct(RegistrationBodyProduct registrationBodyProduct) {
+        Product product = userDAOP.findByName(registrationBodyProduct.getName());
+
         userDAOP.delete(product);
+        return product;
 
     }
     /**
@@ -136,9 +140,14 @@ public class ServiceProduct implements Subject {
         }
     }
 
-
-
-
-
-
+    public Product findByName(ProductName productData){
+        Product product = userDAOP.findByName(productData.getName());
+        if(product != null){
+            return product;
+        }
+        else{
+            return null;
+        }
+    }
+    
 }

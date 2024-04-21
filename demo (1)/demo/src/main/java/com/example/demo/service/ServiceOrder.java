@@ -1,21 +1,20 @@
 package com.example.demo.service;
 
-import com.example.demo.api.model.RegistrationBody;
-import com.example.demo.api.model.RegistrationBodyOrder;
-import com.example.demo.api.model.RegistrationBodyProduct;
+import com.example.demo.api.model.*;
 import com.example.demo.model.Order;
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import com.example.demo.model.dao.UserDAO;
 import com.example.demo.model.dao.UserDAOO;
 import com.example.demo.model.dao.UserDAOP;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 /**
  * ServiceOrder provides functionalities to manage orders within the application.
  * It utilizes UserDAOO for data access operations related to Order entities.
  */
 @Service
-public class ServiceOrder {
+public class ServiceOrder implements ServiceOrderImpl {
     private UserDAOO userDAOO;
     /**
      * Constructs a ServiceOrder with the specified UserDAOO.
@@ -39,7 +38,8 @@ public class ServiceOrder {
         order.setShippingAddress(registrationBodyOrder.getShippingAddress());
         order.setStatus(registrationBodyOrder.getStatus());
 
-        return userDAOO.save(order);
+        userDAOO.save(order);
+        return order;
 
     }
     /**
@@ -50,11 +50,7 @@ public class ServiceOrder {
      */
     public Order findOrder(RegistrationBodyOrder registrationBodyOrder) {
         Order order = new Order();
-        System.out.println(registrationBodyOrder.getId());
         order = userDAOO.findByUsername(registrationBodyOrder.getUsername());
-        System.out.println(order.getShippingAddress());
-        System.out.println(order.getStatus());
-
         return order;
 
     }
@@ -78,13 +74,21 @@ public class ServiceOrder {
      *
      * @param registrationBodyOrder The order details used to find and delete the order.
      */
-    public void deleteOrder(RegistrationBodyOrder registrationBodyOrder) {
-        Order order = new Order();
-        order =findOrder(registrationBodyOrder);
-        order.setShippingAddress(registrationBodyOrder.getShippingAddress());
-        order.setStatus(registrationBodyOrder.getStatus());
-        userDAOO.delete(order);
+    public Order deleteOrder(RegistrationBodyOrder registrationBodyOrder) {
+        Order order = userDAOO.findByUsername(registrationBodyOrder.getUsername());
 
+        userDAOO.delete(order);
+        return order;
+
+    }
+    public Order findByUsername(OrderUsername orderData){
+        Order order = userDAOO.findByUsername(orderData.getUsername());
+        if(order != null){
+            return order;
+        }
+        else{
+            return null;
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.api.model.RegistrationBody;
+import com.example.demo.api.model.UserUsername;
 import com.example.demo.model.User;
 import com.example.demo.model.dao.UserDAO;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
  * This service provides methods to register, update, find, and delete users in the application.
  */
 @Service
-public class ServiceUser {
+public class ServiceUser implements ServiceUserImpl{
     private UserDAO userDAO;
     /**
      * Constructs a ServiceUser with the specified User Data Access Object (DAO).
@@ -47,6 +48,11 @@ public class ServiceUser {
     public User updateUser(RegistrationBody registrationBody) {
         User user = findUser(registrationBody);
 
+        if (user == null) {
+
+            return null;
+        }
+
         user.setEmail(registrationBody.getEmail());
         user.setPassword(registrationBody.getPassword());
         user.setRole(registrationBody.getRole());
@@ -59,13 +65,18 @@ public class ServiceUser {
      *
      * @param registrationBody the details of the user to delete.
      */
-    public void deleteUser(RegistrationBody registrationBody) {
-        User user = new User();
-        user =findUser(registrationBody);
-        user.setEmail(registrationBody.getEmail());
-        user.setPassword(registrationBody.getPassword());
-        user.setRole(registrationBody.getRole());
+    public User deleteUser(RegistrationBody registrationBody) {
+//        User user = new User();
+//        user =findUser(registrationBody);
+//        user.setEmail(registrationBody.getEmail());
+//        user.setPassword(registrationBody.getPassword());
+//        user.setRole(registrationBody.getRole());
+//        userDAO.delete(user);
+        User user = userDAO.findByUsername(registrationBody.getUsername());
+
         userDAO.delete(user);
+        return user;
+
 
     }
 
@@ -78,13 +89,20 @@ public class ServiceUser {
      */
     public User findUser(RegistrationBody registrationBody) {
         User user = new User();
-        System.out.println(registrationBody.getId());
-        System.out.println(registrationBody.getEmail());
+
         user = userDAO.findByUsername(registrationBody.getUsername());
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRole());
+
         return user;
 
     }
+    public User findUserByUsername(UserUsername userData){
+        User user = userDAO.findByUsername(userData.getUsername());
+        if(user != null){
+            return user;
+        }
+        else{
+            return null;
+        }
+    }
+
 }

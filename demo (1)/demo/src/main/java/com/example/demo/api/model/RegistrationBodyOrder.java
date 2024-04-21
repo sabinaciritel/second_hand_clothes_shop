@@ -5,6 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 /**
  * A model class representing registration data for orders.
  */
@@ -80,5 +82,16 @@ public class RegistrationBodyOrder {
         this.status = status;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RegistrationBodyOrder that = (RegistrationBodyOrder) o;
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(shippingAddress, that.shippingAddress) && Objects.equals(status, that.status);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, shippingAddress, status);
+    }
 }

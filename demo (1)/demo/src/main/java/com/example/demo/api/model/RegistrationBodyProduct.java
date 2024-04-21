@@ -3,6 +3,8 @@ package com.example.demo.api.model;
 import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
+import java.util.Objects;
+
 /**
  * A model class representing registration data for products.
  */
@@ -93,5 +95,16 @@ public class RegistrationBodyProduct {
         this.stockQuantity = stockQuantity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RegistrationBodyProduct that = (RegistrationBodyProduct) o;
+        return stockQuantity == that.stockQuantity && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, price, stockQuantity);
+    }
 }

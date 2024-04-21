@@ -2,6 +2,9 @@
  package com.example.demo.api.model;
 
 import jakarta.persistence.Column;
+
+import java.util.Objects;
+
  /**
   * A model class representing registration data.
   */
@@ -11,11 +14,21 @@ public class RegistrationBody {
     private String username;
     private String password;
     private String role;
+
+//     public RegistrationBody(Long id, String email, String username, String password, String role) {
+//         this.id = id;
+//         this.email = email;
+//         this.username = username;
+//         this.password = password;
+//         this.role = role;
+//     }
+
      /**
       * Retrieves the ID of the registration body.
       *
       * @return the ID of the registration body
       */
+
     public Long getId() {
         return id;
     }
@@ -93,4 +106,17 @@ public class RegistrationBody {
     public void setRole(String role) {
         this.role = role;
     }
-}
+
+     @Override
+     public boolean equals(Object o) {
+         if (this == o) return true;
+         if (o == null || getClass() != o.getClass()) return false;
+         RegistrationBody that = (RegistrationBody) o;
+         return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(role, that.role);
+     }
+
+     @Override
+     public int hashCode() {
+         return Objects.hash(id, email, username, password, role);
+     }
+ }
