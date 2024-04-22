@@ -61,6 +61,88 @@ Observator Concret (User): Aceasta clasă implementează interfața Observer și
 Subiect Concret (ServiceProduct): Implementează interfața Subject, gestionând o listă de observatori și notificându-i despre schimbări prin metoda notifyObservers.
 
 Pattern-ul Observer permite decuplarea slabă între obiecte, deoarece subiectul nu trebuie să cunoască detalii specifice despre observatori, ci doar că aceștia implementează interfața Observer. Este utilizat pe scară largă în implementarea sistemelor distribuite de gestionare a evenimentelor, în arhitecturi model-view-controller (MVC) și în scenarii în care un obiect trebuie să notifice alte obiecte fără să facă presupuneri despre cine sunt acele obiecte.
+##Tests
+ServiceOrderTest Overview
+1. Setup Method (setup()):
+
+Initializes mocks and a ServiceOrder instance before each test.
+2. Register Order Test (registerOrderTest()):
+
+Verifies the registration and correct saving of an order using mock interactions.
+3. Find Order Test (findOrderTest()):
+
+Checks if the correct method is called on the mock to find an order by username.
+4. Delete Order Test (deleteOrderTest()):
+
+Ensures that the correct delete method is invoked on the mock for an order.
+5. Update Order Test (updateOrderTest()):
+
+Confirms that the update functionality correctly interacts with the mock to find and update an order.
+6. Find User by Username Test (findUserByUsernameTest()):
+
+Tests the retrieval of a user by username to verify the correct functioning of the findByUsername method on the mock.
+These tests are designed to validate the behavior of the ServiceOrder class using Mockito to simulate database interactions and ensure methods are called as expected.
+
+ServiceProductTest Overview
+1. Setup Method (setup()):
+
+Purpose: Prepares mocks and a ServiceProduct instance before each test run, ensuring a consistent testing environment.
+2. Register Product Test (registerProductMethodTest()):
+
+Purpose: Validates the registration process of a product, ensuring it is correctly saved using mocked DAO interactions.
+3. Find Product by Name Test (findProductMethodTest()):
+
+Purpose: Checks the functionality of retrieving a product by name, verifying correct method calls on the mocked DAO.
+4. Delete Product Test (deleteProductTest()):
+
+Purpose: Ensures that the deletion process of a product is handled correctly, with the appropriate DAO method being invoked.
+5. Update Product Test (updateProductTest()):
+
+Purpose: Tests the update functionality for a product's details, confirming correct interactions with the DAO and accurate data handling.
+6. Find User by Product Name Test (findUserByNameTest()):
+
+Purpose: Verifies the process of finding a product by its name, ensuring the DAO's findByName method is correctly utilized.
+These tests rigorously check the product management functions, simulating database operations using Mockito to confirm that each method performs as expected within the ServiceProduct class.
+
+
+ServiceUserTest Overview
+
+1. Setup Method (setup()):
+
+Purpose: This method prepares the test environment by initializing all necessary mocks and creating an instance of ServiceUser. It is critical for setting a clean slate before each test to ensure that test outcomes are not influenced by previous tests.
+Details: MockitoAnnotations.initMocks(this); is used to automatically set up the mocked objects annotated with @Mock. serviceUser = new ServiceUser(userDAOmock); initializes the ServiceUser with a mock DAO object, allowing for controlled testing of database operations.
+2. Register User Test (registerUserTest()):
+
+Purpose: Ensures that the user registration functionality works as expected. The test confirms that a new user is saved correctly and the saved data matches the provided input.
+Details:
+Input: RegistrationBody containing user details like email, username, password, and role.
+Operation: Simulates the registration process and intercepts the DAO's save operation to validate both input handling and persistence logic.
+Verification: Checks that the returned user object is as expected and verifies that the save method on the mocked DAO was called with the correct parameters.
+3. Find User Test (findUserTest()):
+
+Purpose: Tests the ability of the service to retrieve a user by username from the database, ensuring that the correct database access method is invoked.
+Details:
+Operation: Triggers the find functionality within the service which should then call the DAO's find method.
+Verification: Uses Mockito's verify method to ensure that findByUsername was called on the mock DAO, validating that the service delegates the database operations correctly.
+4. Update User Test (updateUserTest()):
+
+Purpose: Validates that the user's information can be updated correctly, with proper interaction with the DAO for both fetching and updating the user data.
+Details:
+Operation: First retrieves a user based on username and then attempts to update that user's details.
+Verification: Verifies both the retrieval (findByUsername) and update (save) operations on the DAO, ensuring that the service handles the flow of operations correctly.
+5. Delete User Test (deleteUserTest()):
+
+Purpose: Confirms that the service can delete a user correctly, with the DAO's delete method being properly invoked.
+Details:
+Operation: Simulates the deletion of a user and checks that the correct user object is used in the DAO's delete method.
+Verification: Ensures that the delete method is called on the mock DAO, confirming that the service correctly translates business operations into data layer operations.
+6. Find User by Username Test (findUserByUsernameTest()):
+
+Purpose: Tests the functionality to retrieve a user by their username, ensuring that the method on the DAO is appropriately called.
+Details:
+Operation: Specifically tests the findUserByUsername method of the service, focusing on DAO interaction.
+Verification: Confirms that findByUsername is executed on the DAO mock, ensuring that the service accurately queries the data layer based on user input.
+These detailed test descriptions provide a comprehensive overview of how ServiceUserTest ensures the correctness and efficiency of user management functionalities within the service layer, validating the integrity of operations like registration, update, deletion, and retrieval of user data.
 
 
 
