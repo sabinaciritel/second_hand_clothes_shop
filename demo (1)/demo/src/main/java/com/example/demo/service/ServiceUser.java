@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.api.model.LoginBody;
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.api.model.UserUsername;
 import com.example.demo.model.User;
@@ -103,6 +104,14 @@ public class ServiceUser implements ServiceUserImpl{
         else{
             return null;
         }
+    }
+    public boolean authenticateUser(LoginBody loginBody) {
+        // Logica de autentificare (de exemplu, verificarea username și password din baza de date)
+        // Aceasta este o simplificare; adaptează la nevoile tale.
+        if ("sabz".equals(loginBody.getUsername()) && "sabina".equals(loginBody.getPassword())) {
+            return true;
+        }
+        return false;
     }
 
 }

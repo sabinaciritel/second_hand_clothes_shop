@@ -15,18 +15,28 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
+/**
+ * Test class for ServiceUser. It provides unit tests for user management functionalities
+ * such as registering, finding, updating, and deleting users.
+ */
 public class ServiceUserTest {
     @Mock
     private UserDAO userDAOmock;
     private ServiceUser serviceUser;
+    /**
+     * Sets up the test environment. Initializes mocks and creates an instance
+     * of ServiceUser with the mocked DAO.
+     */
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
         serviceUser = new ServiceUser(userDAOmock);
 
     }
-
+    /**
+     * Tests the user registration functionality to ensure that the user is saved correctly and
+     * that the saved user matches the expected user object.
+     */
     @Test
     public void registerUserTest(){
         RegistrationBody userBody = new RegistrationBody();
@@ -46,12 +56,20 @@ public class ServiceUserTest {
         assertEquals(userCreated, user);
         Mockito.verify(userDAOmock).save(userCreated);
     }
+    /**
+     * Tests the functionality to find a user by username. Verifies that the correct method
+     * on the DAO is called to find a user based on the username provided in the user data.
+     */
     @Test
     public void findUserTest(){
         RegistrationBody userData = new RegistrationBody();
         serviceUser.findUser(userData);
         Mockito.verify(userDAOmock).findByUsername(userData.getUsername());
     }
+    /**
+     * Tests updating a user's details. This test checks the process of updating a user
+     * after retrieving their details based on username.
+     */
     @Test
     public void updateUserTest() {
 
@@ -60,13 +78,20 @@ public class ServiceUserTest {
         User user = serviceUser.updateUser(userData);
         Mockito.verify(userDAOmock).findByUsername(userData.getUsername());
     }
-
+    /**
+     * Tests the deletion of a user. Ensures that the DAO's delete method is called with
+     * the correct user object.
+     */
     @Test
     public void deleteUserTest(){
         RegistrationBody userData = new RegistrationBody();
         User user = serviceUser.deleteUser(userData);
         Mockito.verify(userDAOmock).delete(user);
     }
+    /**
+     * Tests finding a user by their username using the ServiceUser. Verifies if the method
+     * to find a user by username is correctly invoked on the DAO mock.
+     */
     @Test
     public void findUserByUsernameTest(){
         UserUsername user = new UserUsername();

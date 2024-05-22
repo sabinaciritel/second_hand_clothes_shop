@@ -149,5 +149,5 @@ public class ServiceProduct implements ServiceProductImpl,Subject {
             return null;
         }
     }
-    
+
 }

@@ -1,8 +1,11 @@
 
 package com.example.demo.api.controller.auth;
 
+import com.example.demo.api.model.LoginBody;
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.service.ServiceUser;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +22,13 @@ public class AuthentificationController {
      * @param registrationBody The registration details including email, username, password, and role.
      */
     @PostMapping("/register")
-    public void registerUser(@RequestBody RegistrationBody registrationBody){
-        serviceUser.registerUser(registrationBody);
-
+    public ResponseEntity<String> registerUser(@RequestBody RegistrationBody registrationBody) {
+        try {
+            serviceUser.registerUser(registrationBody);
+            return ResponseEntity.ok("Registration successful");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
+        }
     }
     /**
      * Finds a user based on the details provided in the registration body. Typically, this operation might require
@@ -52,6 +59,15 @@ public class AuthentificationController {
     @DeleteMapping ("/delete")
     public void deleteUser(@RequestBody RegistrationBody registrationBody){
         serviceUser.deleteUser(registrationBody);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginBody loginBody) {
+        boolean isAuthenticated = serviceUser.authenticateUser(loginBody);
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
     }
 
 
