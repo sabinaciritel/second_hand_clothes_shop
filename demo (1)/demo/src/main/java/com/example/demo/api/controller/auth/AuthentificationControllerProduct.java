@@ -3,9 +3,16 @@ package com.example.demo.api.controller.auth;
 
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.api.model.RegistrationBodyProduct;
+import com.example.demo.model.Product;
+import com.example.demo.model.User;
 import com.example.demo.service.ServiceProduct;
 import com.example.demo.service.ServiceUser;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 /**
  * Controller for handling product authentication.
  */
@@ -26,6 +33,11 @@ public class AuthentificationControllerProduct {
      *
      * @param registrationBodyProduct the object containing the product details
      */
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> getAllUsers() {
+        List<Product> products = serviceProduct.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
     @PostMapping("/registerProduct")
     public void registerProduct(@RequestBody RegistrationBodyProduct registrationBodyProduct){
         serviceProduct.registerProduct(registrationBodyProduct);
@@ -38,7 +50,7 @@ public class AuthentificationControllerProduct {
      */
     @GetMapping("/findProduct")
     public void findProduct(@RequestBody RegistrationBodyProduct registrationBodyProduct){
-        serviceProduct.findProduct(registrationBodyProduct);
+        serviceProduct.findProduct(registrationBodyProduct.getId());
 
     }
     /**

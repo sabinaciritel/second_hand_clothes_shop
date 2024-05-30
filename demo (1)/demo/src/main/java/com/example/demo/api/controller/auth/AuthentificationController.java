@@ -3,10 +3,13 @@ package com.example.demo.api.controller.auth;
 
 import com.example.demo.api.model.LoginBody;
 import com.example.demo.api.model.RegistrationBody;
+import com.example.demo.model.User;
 import com.example.demo.service.ServiceUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -16,16 +19,25 @@ public class AuthentificationController {
     public AuthentificationController(ServiceUser serviceUser) {
         this.serviceUser = serviceUser;
     }
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = serviceUser.findAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
+
     /**
      * Registers a new user with the details provided in the registration body.
      *
      * @param registrationBody The registration details including email, username, password, and role.
      */
+
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody RegistrationBody registrationBody) {
         try {
             serviceUser.registerUser(registrationBody);
-            return ResponseEntity.ok("Registration successful");
+            return ResponseEntity.ok("Successfully registered user");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
         }
@@ -62,13 +74,14 @@ public class AuthentificationController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginBody loginBody) {
-        boolean isAuthenticated = serviceUser.authenticateUser(loginBody);
-        if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+        User user = serviceUser.authenticateUser(loginBody);
+        if (user != null) {
+            return ResponseEntity.ok(user.getRole());
         } else {
             return ResponseEntity.status(401).body("Invalid username or password");
         }
     }
+
 
 
 }
