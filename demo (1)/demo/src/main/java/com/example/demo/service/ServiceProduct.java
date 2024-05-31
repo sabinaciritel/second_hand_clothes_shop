@@ -26,7 +26,7 @@ public class ServiceProduct implements  Subject {
         product.setDescription(registrationBodyProduct.getDescription());
         product.setPrice(registrationBodyProduct.getPrice());
         product.setStockQuantity(registrationBodyProduct.getStockQuantity());
-
+        product.setImage(registrationBodyProduct.getImage());
         return userDAOP.save(product);
     }
 
@@ -49,10 +49,25 @@ public class ServiceProduct implements  Subject {
         if (registrationBodyProduct.getStockQuantity() == 0) {
             notifyObservers();
         }
-
+        product.setImage(registrationBodyProduct.getImage());
         return userDAOP.save(product);
-    }
 
+    }
+    public Product updProduct(Product product) {
+        Optional<Product> productOptional = findProduct(product.getId());
+        if (!productOptional.isPresent()) {
+            throw new RuntimeException("Product not found");
+        }
+
+        Product existingProduct = productOptional.get();
+        existingProduct.setName(product.getName());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setStockQuantity(product.getStockQuantity());
+        existingProduct.setImage(product.getImage());
+
+        return userDAOP.save(existingProduct);
+    }
     public void deleteProduct(RegistrationBodyProduct registrationBodyProduct) {
         Optional<Product> productOptional = userDAOP.findById(registrationBodyProduct.getId());
         if (!productOptional.isPresent()) {

@@ -27,6 +27,9 @@ public class Product {
 
     @Column(nullable = false)
     private int stockQuantity;
+    @Lob
+    @Column(nullable = true) // Asigură-te că este permisă valoarea null pentru a nu cauza erori la adăugare fără imagine
+    private byte[] image;
 
     /**
      * Default constructor for Product entity.
@@ -42,11 +45,12 @@ public class Product {
      * @param price         The price of the product, which is a non-nullable field.
      * @param stockQuantity The number of units of the product available in stock, which is a non-nullable field.
      */
-    public Product(String name, String description, BigDecimal price, int stockQuantity) {
+    public Product(String name, String description, BigDecimal price, int stockQuantity,byte[] image) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
+        this.image = image;
     }
 
     // Getters and setters are documented for accessibility by the JPA and other calling classes.
@@ -129,5 +133,13 @@ public class Product {
      */
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

@@ -14,6 +14,7 @@ public class RegistrationBodyProduct {
     private String description;
     private BigDecimal price;
     private int stockQuantity;
+    private byte[] image;
     /**
      * Retrieves the ID of the product registration body.
      *
@@ -93,6 +94,14 @@ public class RegistrationBodyProduct {
      */
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

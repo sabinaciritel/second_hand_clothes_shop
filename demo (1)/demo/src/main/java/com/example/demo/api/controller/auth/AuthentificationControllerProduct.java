@@ -10,8 +10,11 @@ import com.example.demo.service.ServiceUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller for handling product authentication.
@@ -72,6 +75,33 @@ public class AuthentificationControllerProduct {
     public void deleteProduct(@RequestBody RegistrationBodyProduct registrationBodyProduct){
         serviceProduct.deleteProduct(registrationBodyProduct);
 
+    }
+    @PostMapping("/{id}/uploadImage")
+    public ResponseEntity<String> uploadImage(@PathVariable Long id, @RequestParam("image") MultipartFile file) {
+        try {
+            Optional<Product> productOptional = serviceProduct.findProduct(id);
+            if (!productOptional.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+            }
+            Product product = productOptional.get();
+            product.setImage(file.getBytes());
+            serviceProduct.updProduct(product);
+            return ResponseEntity.ok("Image uploaded successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
+        }
+    }
+
+    @GetMapping("/{id}/image")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Optional<Product> productOptional = serviceProduct.findProduct(id);
+        if (!productOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        Product product = productOptional.get();
+        byte[] image = product.getImage();
+        return ResponseEntity.ok().contentType(org.springframework.http.MediaType.IMAGE_JPEG).body(image);
     }
 
 
