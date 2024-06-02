@@ -103,6 +103,19 @@ public class AuthentificationControllerProduct {
         byte[] image = product.getImage();
         return ResponseEntity.ok().contentType(org.springframework.http.MediaType.IMAGE_JPEG).body(image);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam("query") String query) {
+        List<Product> products = serviceProduct.searchProductsByName(query);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Optional<Product> productOptional = serviceProduct.findProduct(id);
+        if (!productOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(productOptional.get());
+    }
 
 
 

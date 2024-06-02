@@ -109,4 +109,7 @@ public class ServiceUser implements ServiceUserImpl {
     public List<User> findAllUsers() {
         return userDAO.findAll();
     }
+    public User getUserDetails(String username) {
+        return userDAO.findByUsername(username);
+    }
 }

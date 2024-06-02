@@ -5,10 +5,12 @@ import com.example.demo.api.model.LoginBody;
 import com.example.demo.api.model.RegistrationBody;
 import com.example.demo.model.User;
 import com.example.demo.service.ServiceUser;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 
 @RestController
@@ -25,6 +27,18 @@ public class AuthentificationController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+
+    @GetMapping("/user-details")
+    public ResponseEntity<?> getUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = serviceUser.getUserDetails(username);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(404).body("User not found");
+        }
+    }
 
 
     /**

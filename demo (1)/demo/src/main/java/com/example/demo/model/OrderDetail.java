@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 /**
  * Represents the details of an order in the online store.
- * This includes the order it's related to, the product purchased, and the quantity of that product.
- * Each order detail is associated with one product and belongs to one order, forming a many-to-one relationship
- * with both the Order and Product entities.
+ * This includes the product purchased and the user who made the purchase.
+ * Each order detail is associated with one product and one user, forming a many-to-one relationship
+ * with both the Product and User entities.
  */
 @Entity
 @Table(name = "order_details")
@@ -17,34 +17,15 @@ public class OrderDetail {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
-
-    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     private int quantity;
-
-    /**
-     * Default constructor for OrderDetail entity.
-     */
-    public OrderDetail() {
-    }
-
-    /**
-     * Creates an order detail with specified order, product, and quantity.
-     *
-     * @param order    The order this detail belongs to.
-     * @param product  The product being ordered.
-     * @param quantity The quantity of the product.
-     */
-    public OrderDetail(Order order, Product product, int quantity) {
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-    }
 
     // Standard getters and setters are documented for their general purpose and use.
 
@@ -65,22 +46,6 @@ public class OrderDetail {
     }
 
     /**
-     * Gets the order associated with this detail.
-     * @return The order.
-     */
-    public Order getOrder() {
-        return order;
-    }
-
-    /**
-     * Sets the order this detail is associated with.
-     * @param order The order.
-     */
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    /**
      * Gets the product associated with this order detail.
      * @return The product.
      */
@@ -94,6 +59,22 @@ public class OrderDetail {
      */
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    /**
+     * Gets the user associated with this order detail.
+     * @return The user.
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Sets the user this detail is associated with.
+     * @param user The user.
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

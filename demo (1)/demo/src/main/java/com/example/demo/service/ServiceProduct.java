@@ -96,4 +96,7 @@ public class ServiceProduct implements  Subject {
     public List<Product> findAllProducts() {
         return userDAOP.findAll();
     }
+    public List<Product> searchProductsByName(String query) {
+        return userDAOP.findByNameContainingIgnoreCase(query);
+    }
 }

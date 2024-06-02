@@ -28,7 +28,7 @@ public class Product {
     @Column(nullable = false)
     private int stockQuantity;
     @Lob
-    @Column(nullable = true) // Asigură-te că este permisă valoarea null pentru a nu cauza erori la adăugare fără imagine
+    @Column(name = "image", columnDefinition="LONGBLOB")
     private byte[] image;
 
     /**
