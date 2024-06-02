@@ -4,28 +4,34 @@
 Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand, care permite utilizatorilor să posteze anunțuri pentru hainele pe care doresc să le vândă și să cumpere hainele disponibile în magazin. Magazinul va oferi o platformă pentru utilizatori să navigheze, să căute și să cumpere haine second-hand de la diferiți vânzători.
 
 ## For Users
-1.Registration and Authentication:
-   Can register to create a new account.
-   Can log in using an existing account.
-Account Management:
+## Registration and Authentication
 
-Can view and update personal information (e.g., name, address, contact details).
-Can change the password or other account settings.
-Browsing and Searching Products:
+- **Register**: Create a new account.
+- **Log In**: Access an existing account.
 
-Can browse through different product categories.
-Can search for specific products using a search bar.
-Viewing Product Details:
+## Account Management
 
-Can view the description, price, images, and other details of products.
-Adding Products to Cart:
+- **View/Update Personal Information**: Update details such as name, address, and contact information.
+- **Change Password/Settings**: Modify password or other account settings.
 
-Can add products to the shopping cart.
-Can modify the quantity of products in the cart or remove products from the cart.
-Placing Orders:
+## Browsing and Searching Products
 
-Can place an order, specifying delivery details and payment method.
-Can view order history and the status of current orders.
+- **Browse Categories**: Explore different product categories.
+- **Search Products**: Use the search bar to find specific products.
+
+## Viewing Product Details
+
+- **View Product Information**: See descriptions, prices, images, and other product details.
+
+## Adding Products to Cart
+
+- **Add to Cart**: Add products to the shopping cart.
+- **Modify Cart**: Change the quantity of products or remove items from the cart.
+
+## Placing Orders
+
+- **Place an Order**: Specify delivery details and choose a payment method.
+- **Order History**: View past orders and the status of current orders.
 
 
 
