@@ -9,29 +9,52 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 - **Register**: Create a new account.
 - **Log In**: Access an existing account.
 
-## Account Management
+**Account Management**
 
 - **View/Update Personal Information**: Update details such as name, address, and contact information.
 - **Change Password/Settings**: Modify password or other account settings.
 
-## Browsing and Searching Products
+**Browsing and Searching Products**
 
 - **Browse Categories**: Explore different product categories.
 - **Search Products**: Use the search bar to find specific products.
 
-## Viewing Product Details
+**Viewing Product Details**
 
 - **View Product Information**: See descriptions, prices, images, and other product details.
 
-## Adding Products to Cart
+**Adding Products to Cart**
 
 - **Add to Cart**: Add products to the shopping cart.
 - **Modify Cart**: Change the quantity of products or remove items from the cart.
 
-## Placing Orders
+**Placing Orders**
 
 - **Place an Order**: Specify delivery details and choose a payment method.
 - **Order History**: View past orders and the status of current orders.
+
+  ![](C:\Users\Ciri\Pictures\admin.JPG)
+## For Admin
+# Admin Features
+
+**Single Admin**
+
+- **Admin Role**: There is currently only one admin.
+
+**User Management**
+
+- **View Users**: See the list of users and their account details.
+- **Manage User Accounts**: Add, modify, or delete user accounts.
+
+**Product Management**
+
+- **Catalog Management**: Add, update, or delete products from the catalog.
+- **Inventory and Pricing**: Manage inventory levels and update product prices.
+
+**Order Management**
+
+- **View Orders**: Access all orders placed by users.
+- **Update Order Status**: Change the status of orders (e.g., confirmation, shipping, delivery).
 
 
 
