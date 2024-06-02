@@ -1,7 +1,7 @@
-# Descrierea Proiectului: Magazin Online de Haine Second-Hand
-
+# Online Clothing Store
+The purpose of this project is to develop an online clothing store that allows users to purchase the available clothes in the store. The store will offer a platform for users to browse, search, and buy second-hand clothes from various sellers.
 ## Scopul Proiectului
-Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand, care permite utilizatorilor să posteze anunțuri pentru hainele pe care doresc să le vândă și să cumpere hainele disponibile în magazin. Magazinul va oferi o platformă pentru utilizatori să navigheze, să căute și să cumpere haine second-hand de la diferiți vânzători.
+Scopul acestui proiect este de a dezvolta un magazin online de haine , care permite utilizatorilor să  cumpere hainele disponibile în magazin. Magazinul va oferi o platformă pentru utilizatori să navigheze, să căute și să cumpere haine second-hand de la diferiți vânzători.
 
 ## For Users
 **Registration and Authentication**
