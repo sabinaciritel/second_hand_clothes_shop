@@ -65,6 +65,7 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 **Technologies used**
 - **Spring Boot**
 - **MySQL Database**
+   ![](sql.JPG)
 ### API Endpoints
 ### User Endpoints
 **GET /auth/users:**
@@ -124,6 +125,7 @@ Registers a new order detail.
 
 **GET /authOrderDetail/orderDetails/user/{username}:**
 Returns a list of order details for a specific user identified by `{username}`.
+ ![](intellij.JPG)
 ## Frontend
 **Technologies used**
 - **React**
