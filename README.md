@@ -4,7 +4,7 @@
 Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand, care permite utilizatorilor să posteze anunțuri pentru hainele pe care doresc să le vândă și să cumpere hainele disponibile în magazin. Magazinul va oferi o platformă pentru utilizatori să navigheze, să căute și să cumpere haine second-hand de la diferiți vânzători.
 
 ## For Users
-## Registration and Authentication
+**Registration and Authentication**
 
 - **Register**: Create a new account.
 - **Log In**: Access an existing account.
