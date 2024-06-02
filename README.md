@@ -33,7 +33,7 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 - **Place an Order**: Specify delivery details and choose a payment method.
 - **Order History**: View past orders and the status of current orders.
 
-  ![](C:\Users\Ciri\Pictures\admin.JPG)
+  ![](USER.JPG)
 ## For Admin
 # Admin Features
 
@@ -55,50 +55,99 @@ Scopul acestui proiect este de a dezvolta un magazin online de haine second-hand
 
 - **View Orders**: Access all orders placed by users.
 - **Update Order Status**: Change the status of orders (e.g., confirmation, shipping, delivery).
+ ![](admin.JPG)
 
 
 
-## Tehnologii Utilizate
-1. Spring Data JPA: Pentru operațiile de bază de date, facilitând lucrul cu date relaționale.
-2. Thymeleaf: Ca motor de șabloane pentru redarea vizualizărilor.
-3. MySQL: Pentru baza de date destinată stocării informațiilor despre produsele și utilizatorii magazinului.
-4. Spring Security: Pentru autentificare și autorizare.
-5. Maven: Pentru gestionarea proiectului și instrument de construcție.
 
 
 ## Backend
+**Technologies used**
+- **Spring Boot**
+- **MySQL Database**
+### API Endpoints
+### User Endpoints
+**GET /auth/users:**
+ Returns a list of all users in the system.
+ **GET /auth/user-details:**
+ Returns details of the currently authenticated user.
+ **POST /auth/register:**
+ Registers a new user with the details.
+ **GET /auth/find:**
+  Finds a user
+  **PUT /auth/update:**
+  Updates the details of an existing user.(admin only)
+  **DELETE /auth/delete:**
+  Enables the deletion of an existing user (admin only).
+  **POST /auth/login:**
+  Authenticates a user's login credentials.
+  ### Product Endpoints
+**GET /authProduct/products:**
+Returns a list of all products in the system.
 
-POST /auth/register Descriere: Înregistrează un utilizator nou cu informațiile de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile de înregistrare necesare pentru crearea unui cont de utilizator nou. Răspuns: Această rută nu returnează explicit un corp al răspunsului. În cazul unei înregistrări reușite, utilizatorul este înregistrat în sistem fără niciun mesaj de confirmare. 
+**POST /authProduct/registerProduct:**
+Registers a new product.
 
-GET /auth/find Descriere: Găsește un utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului folosite pentru găsirea unui cont de utilizator. Răspuns: Această rută nu returnează explicit un corp al răspunsului. Se presupune că efectuează o formă de căutare a utilizatorului și gestionează rezultatul intern sau prin excepții. Notă: Utilizarea @RequestBody într-o cerere de tip GET este neconvențională și s-ar putea să nu fie suportată de toți clienții sau proxy-urile.
+**GET /authProduct/findProduct:**
+Finds a product based on the details provided in `RegistrationBodyProduct`.
 
-DELETE /auth/delete Descriere: Șterge un utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului necesare pentru ștergerea unui cont de utilizator. Răspuns: Această rută nu returnează explicit un corp al răspunsului. 
+**PUT /authProduct/updateProduct:**
+Updates the details of an existing product .
 
-PUT /auth/update Descriere: Actualizează informațiile unui utilizator pe baza informațiilor de înregistrare furnizate. Corpul Cererii: RegistrationBody Conține informațiile utilizatorului care urmează să fie actualizate. Răspuns: Această rută nu returnează explicit un corp al răspunsului. În cazul unei actualizări reușite, informațiile utilizatorului sunt actualizate în sistem fără niciun mesaj de confirmare. Modele RegistrationBody Modelul RegistrationBody conține informații despre utilizator, care sunt utilizate în diverse puncte terminale pentru înregistrarea, găsirea, ștergerea și actualizarea utilizatorilor. Câmpurile și constrângerile specifice de validare ale acestui model nu sunt detaliate în fragmentul de cod furnizat.
+**DELETE /authProduct/deleteProduct:**
+Deletes a product based on the details.
 
-## Observer Pattern
+**POST /authProduct/{id}/uploadImage:**
+Uploads an image for a specific product identified by `{id}`.
 
-Folosind Java, implementarea pattern-ului Observer implică câteva componente cheie care colaborează pentru a permite unui subiect să notifice observatorii săi despre schimbări, fără ca aceștia să fie strâns cuplați. Iată o descriere bazată pe fișierele încărcate:
+**GET /authProduct/{id}/image:**
+Retrieves the image of a specific product identified by `{id}`.
 
-Observer.java: Definește interfața pe care orice observator trebuie să o implementeze pentru a primi actualizări de la subiect. Observatorii vor avea o metodă update prin care sunt notificați.
+**GET /authProduct/search:**
+Searches for products by name based on the query parameter `query`.
 
-Subject.java: Conturează interfața pentru subiect, detaliiind metode pentru atașarea, detașarea observatorilor și o metodă notifyObservers pentru a actualiza toți observatorii despre schimbări.
+**GET /authProduct/{id}:**
+Retrieves details of a specific product identified by `{id}`.
 
-User.java: Reprezintă o implementare concretă a interfeței Observer, indicând cum un utilizator (ca observator) primește actualizări. Aceasta este o clasă care va răspunde la notificările subiectului.
+### Order Endpoints
+**POST /authOrder/registerOrder:**
+Registers a new order`.
 
-ServiceProduct.java: Este o implementare a interfeței Subject, arătând cum un serviciu sau produs (ca subiect) gestionează observatorii săi și îi notifică despre schimbări. Aceasta menține o listă de observatori și îi notifică prin metoda notifyObservers.
+**GET /authOrder/orders:**
+Returns a list of all orders in the system.
 
-Descriere Detaliată a Implementării Pattern-ului Observer:
-Interfața Observer: Observatorii trebuie să implementeze această interfață pentru a putea primi notificări. Cheia aici este metoda update, prin care sunt anunțați de schimbări.
+**GET /authOrder/orders/user/{username}:**
+Returns a list of orders for a specific user identified by `{username}`.
+### Order Details Endpoints
+**POST /authOrderDetail/registerOrderDetail:**
+Registers a new order detail.
 
-Interfața Subject: Aceasta include metode pentru înregistrarea (attach), scoaterea din înregistrare (detach) a observatorilor și o metodă notifyObservers pentru a actualiza toți observatorii înregistrați despre schimbare.
+**GET /authOrderDetail/orderDetails/user/{username}:**
+Returns a list of order details for a specific user identified by `{username}`.
+## Frontend
+**Technologies used**
+- **React**
+### User Authentication and Profile Management
+At the heart of the online clothing store is a robust user authentication system. This system enables new users to register and create accounts, ensuring that personal information is securely stored and easily accessible. Upon logging in, users are greeted with their profile page, where they can update personal details such as their name, email address, and password. Additionally, users have access to their order history.
 
-Observator Concret (User): Aceasta clasă implementează interfața Observer și, în metoda sa update, va reacționa la notificarea primită de la subiect.
+### Product Management
+The core of the store’s offering lies in its product management capabilities. Users can browse through a comprehensive list of all available products, each presented with detailed information including images, descriptions, and pricing. The product listing feature ensures that customers can easily find what they are looking for, while the product details page provides in-depth information to aid their purchasing decisions. To enhance user experience, a search bar is integrated into the platform, allowing users to quickly find products by name or keyword. This search functionality is essential for a large inventory, ensuring that users can navigate the store efficiently.
 
-Subiect Concret (ServiceProduct): Implementează interfața Subject, gestionând o listă de observatori și notificându-i despre schimbări prin metoda notifyObservers.
+### Shopping Cart and Wishlist
+A key aspect of the online shopping experience is the ability to manage a shopping cart and wishlist. Users can add products to their shopping cart, view the contents of their cart at any time, and proceed to checkout when ready. This process is streamlined to ensure a smooth transition from browsing to purchasing. Additionally, the wishlist feature allows users to save products for future reference. This is particularly useful for customers who are not ready to make an immediate purchase but want to keep track of items they are interested in. The integration of these features enhances user convenience and promotes repeat visits to the store.
 
-Pattern-ul Observer permite decuplarea slabă între obiecte, deoarece subiectul nu trebuie să cunoască detalii specifice despre observatori, ci doar că aceștia implementează interfața Observer. Este utilizat pe scară largă în implementarea sistemelor distribuite de gestionare a evenimentelor, în arhitecturi model-view-controller (MVC) și în scenarii în care un obiect trebuie să notifice alte obiecte fără să facă presupuneri despre cine sunt acele obiecte.
-##Tests
+### Admin Functionalities
+Administrators play a crucial role in maintaining the store’s operations, and the project includes a set of powerful admin functionalities to support this. Admins can add new products to the inventory, ensuring that the latest offerings are always available to customers. They can also edit existing products, updating details such as pricing, descriptions, and images to reflect current stock and promotions. Additionally, the ability to delete products ensures that outdated or unavailable items are removed from the store. Beyond product management, administrators have the capability to manage user accounts. This includes viewing user details, editing information, and deleting accounts if necessary. These admin functionalities are essential for maintaining an up-to-date and user-friendly store.
+
+### Order Management
+Managing orders is another critical component of the store’s functionality. Both administrators and users can view a comprehensive list of all orders. For users, this means being able to track their purchases and view order statuses. For administrators, it involves overseeing the entire order process, from purchase to delivery. Each order includes detailed information about the products ordered, quantities, and user information. This transparency ensures that orders are processed efficiently and any issues can be promptly addressed.
+
+### Navigation and Layout
+The application’s navigation and layout are designed to provide a cohesive and intuitive user experience. The sidebar and dashboard offer easy navigation between different sections of the application, ensuring that users can find what they need without hassle. The consistent layout across all pages helps maintain a uniform look and feel, making the store both aesthetically pleasing and easy to navigate.
+
+### Project Structure
+The project’s structure is organized to separate concerns and enhance maintainability. The Components directory houses all React components, each categorized by functionality. This includes separate folders for admin functionalities, product details, user dashboards, and more. The Assets directory is used for static assets like images, ensuring that resources are easily accessible and organized. Additionally, the Context directory leverages React Context API to manage state for the shopping cart and wishlist, providing a centralized and efficient state management solution.
+## Tests
 ServiceOrderTest Overview
 1. Setup Method (setup()):
 
